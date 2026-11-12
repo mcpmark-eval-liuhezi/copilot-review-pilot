@@ -1,17 +1,18 @@
-#!/usr/bin/env node
-// pilot-example.js — Small example script for the Copilot code review pilot
-// Counts words in a short sample text and prints a summary.
+// pilot-example.js — Small example script for the Copilot review pilot
+// Purpose: demonstrate a PR with a short, reviewable change.
 
-const sampleText = "GitHub Copilot code review pilot: a tiny script to demonstrate automated review requests on pull requests.";
+const fs = require('fs');
+const path = require('path');
 
-function wordCount(text) {
-  return text.trim().split(/\s+/).filter(Boolean).length;
-}
+const cwd = process.cwd();
+const files = fs.readdirSync(cwd, { withFileTypes: true });
 
-function main() {
-  const words = wordCount(sampleText);
-  console.log(`Sample text word count: ${words}`);
-  console.log("Pilot example script executed successfully.");
-}
+const summary = files
+  .filter(f => f.isFile())
+  .map(f => `- ${f.name}`)
+  .join('\n');
 
-main();
+console.log('Repository files in', cwd + ':');
+console.log(summary || '(no files)');
+
+module.exports = { listFiles: () => files };
