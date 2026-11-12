@@ -1,5 +1,5 @@
-// pilot-example.js
-// Small example script for the GitHub Copilot code review pilot.
+#!/usr/bin/env node
+// pilot-example.js — Small example script for the Copilot code review pilot
 // Counts words in a short sample text and prints a summary.
 
 const sampleText = "GitHub Copilot code review pilot: a tiny script to demonstrate automated review requests on pull requests.";
